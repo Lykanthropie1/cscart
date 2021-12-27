@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2021-12-27 10:56:29
+<?php /* Smarty version Smarty-3.1.21, created on 2021-12-27 15:02:00
          compiled from "C:\OpenServer\domains\cscart\design\backend\templates\views\profiles\update_department.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:41925648661c97058e5d336-23952212%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '142876d764c175909ee93cc1c8a269570b8bf8cb' => 
     array (
       0 => 'C:\\OpenServer\\domains\\cscart\\design\\backend\\templates\\views\\profiles\\update_department.tpl',
-      1 => 1640591749,
+      1 => 1640606511,
       2 => 'tygh',
     ),
   ),
@@ -22,7 +22,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'department_data' => 0,
     'id' => 0,
     'settings' => 0,
-    'u_info' => 0,
+    'd_info' => 0,
+    'w_info' => 0,
     'hide_first_button' => 0,
     'hide_second_button' => 0,
   ),
@@ -99,7 +100,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <label class="control-label"><?php echo $_smarty_tpl->__("director");?>
 </label>
                 <div class="controls">
-                    <?php echo $_smarty_tpl->getSubTemplate ("pickers/users/picker.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array('but_text'=>$_smarty_tpl->__("add_director"),'data_id'=>"return_users",'but_meta'=>"btn",'input_name'=>"department_data[user_id]",'item_ids'=>$_smarty_tpl->tpl_vars['department_data']->value['user_id'],'placement'=>"right",'display'=>"radio",'view_mode'=>"single_button",'user_info'=>$_smarty_tpl->tpl_vars['u_info']->value), 0);?>
+                    <?php echo $_smarty_tpl->getSubTemplate ("pickers/users/picker.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array('but_text'=>$_smarty_tpl->__("add_director"),'data_id'=>"return_users",'but_meta'=>"btn",'input_name'=>"department_data[director_id]",'item_ids'=>$_smarty_tpl->tpl_vars['department_data']->value['director_id'],'placement'=>"right",'display'=>"radio",'view_mode'=>"single_button",'user_info'=>$_smarty_tpl->tpl_vars['d_info']->value), 0);?>
 
                 </div>
             </div>
@@ -108,17 +109,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <label class="control-label"><?php echo $_smarty_tpl->__("workers");?>
 </label>
                 <div class="controls">
-                    <?php echo $_smarty_tpl->getSubTemplate ("pickers/users/picker.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array('but_text'=>$_smarty_tpl->__("add_workers"),'data_id'=>"return_users",'but_meta'=>"btn",'input_name'=>"department_data[user_id]",'item_ids'=>$_smarty_tpl->tpl_vars['department_data']->value['user_id'],'placement'=>"right",'display'=>"checkbox",'view_mode'=>"single_button",'user_info'=>$_smarty_tpl->tpl_vars['u_info']->value), 0);?>
+                    <?php echo $_smarty_tpl->getSubTemplate ("pickers/users/picker.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array('but_text'=>$_smarty_tpl->__("add_workers"),'data_id'=>"return_users",'but_meta'=>"btn",'input_name'=>"department_data[workers_ids]",'item_ids'=>$_smarty_tpl->tpl_vars['department_data']->value['workers_ids'],'placement'=>"right",'user_info'=>$_smarty_tpl->tpl_vars['w_info']->value), 0);?>
 
                 </div>
             </div>
-
-
-
-
-
-
-
 
             <!--content_general--></div>
         <!--content_addons--></div>
@@ -145,7 +139,7 @@ if (!empty($_capture_buffer)) {
 
         <?php $_smarty_tpl->_capture_stack[0][] = array("adv_buttons", null, null); ob_start(); ?>
             <?php if (!$_smarty_tpl->tpl_vars['id']->value) {?>
-                <?php echo $_smarty_tpl->getSubTemplate ("buttons/save_cancel.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array('but_role'=>"submit-link",'but_target_form'=>"departments_form",'but_name'=>"dispatch[profiles.update_department]"), 0);?>
+                <?php echo $_smarty_tpl->getSubTemplate ("buttons/save_cancel.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array('but_role'=>"submit-link",'but_target_form'=>"departments_form",'but_name'=>"dispatch[profiles.adding_department]"), 0);?>
 
             <?php } else { ?>
                 <?php echo $_smarty_tpl->getSubTemplate ("buttons/save_cancel.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array('but_name'=>"dispatch[profiles.update_department]",'but_role'=>"submit-link",'but_target_form'=>"departments_form",'hide_first_button'=>$_smarty_tpl->tpl_vars['hide_first_button']->value,'hide_second_button'=>$_smarty_tpl->tpl_vars['hide_second_button']->value,'save'=>$_smarty_tpl->tpl_vars['id']->value), 0);?>

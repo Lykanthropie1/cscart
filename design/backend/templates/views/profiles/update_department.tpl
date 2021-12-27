@@ -62,12 +62,12 @@
                             but_text=__("add_director")
                             data_id="return_users"
                             but_meta="btn"
-                            input_name="department_data[user_id]"
-                            item_ids=$department_data.user_id
+                            input_name="department_data[director_id]"
+                            item_ids=$department_data.director_id
                             placement="right"
                             display = "radio"
                             view_mode="single_button"
-                            user_info = $u_info}
+                            user_info = $d_info}
                 </div>
             </div>
 
@@ -78,22 +78,13 @@
                     but_text=__("add_workers")
                     data_id="return_users"
                     but_meta="btn"
-                    input_name="department_data[user_id]"
-                    item_ids=$department_data.user_id
+                    input_name="department_data[workers_ids][]"
+                    item_ids=$department_data.workers_ids
                     placement="right"
-                    display = "checkbox"
-                    view_mode="single_button"
-                    user_info = $u_info}
+                    user_info = $w_info}
                 </div>
             </div>
 
-{*            {include file="views/products/components/picker/picker.tpl"*}
-{*            input_name="collection_data[product_ids][]"*}
-{*            item_ids=$collection_data.product_ids*}
-{*            multiple=true*}
-{*            view_mode="external"*}
-{*            select_group_class="btn-toolbar"*}
-{*            }*}
             <!--content_general--></div>
         <!--content_addons--></div>
         {capture name = "buttons"}
@@ -107,7 +98,7 @@
 
         {capture name="adv_buttons"}
             {if !$id}
-                {include file="buttons/save_cancel.tpl" but_role="submit-link" but_target_form="departments_form" but_name="dispatch[profiles.update_department]"}
+                {include file="buttons/save_cancel.tpl" but_role="submit-link" but_target_form="departments_form" but_name="dispatch[profiles.adding_department]"}
             {else}
                 {include file="buttons/save_cancel.tpl" but_name="dispatch[profiles.update_department]" but_role="submit-link" but_target_form="departments_form" hide_first_button=$hide_first_button hide_second_button=$hide_second_button save=$id}
             {/if}
