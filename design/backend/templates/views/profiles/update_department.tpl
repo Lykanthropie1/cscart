@@ -18,13 +18,6 @@
                 </div>
             </div>
 
-            <div class="control-group">
-                <label for="elm_department_position" class="control-label cm-required">{__("position_short")}</label>
-                <div class="controls">
-                    <input type="text" name="department_data[position]" id="elm_department_position" value="{$department_data.position}" size="25" class="input-large" />
-                </div>
-            </div>
-
             <div class="control-group" id="department_graphic">
                 <label class="control-label">{__("image")}</label>
                 <div class="controls">

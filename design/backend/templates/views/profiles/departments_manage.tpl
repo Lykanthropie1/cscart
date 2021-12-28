@@ -24,9 +24,6 @@
                                 {include file="common/check_items.tpl"}
                             </th>
                             <th>
-                                <a class="cm-ajax" href="{"`$c_url`&sort_by=position&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("position")}{if $search.sort_by === "position"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a>
-                            </th>
-                            <th>
 
                             </th>
                             <th>
@@ -50,10 +47,6 @@
                                     <input type="checkbox" name="department_ids[]" value="{$department.department_id}" class="cm-item {$no_hide_input} cm-item-status-{$department.status|lower}" />
                                 </td>
 
-                                <td>
-                                    <input type="text" name="departments_data[{$department.department_id}][position]" value="{$department.position}" size="3" class="input-micro input-hidden">
-                                </td>
-
                                 <td class="products-list__image">
                                     {include
                                     file="common/image.tpl"
@@ -72,7 +65,7 @@
                                     {include file="views/companies/components/company_name.tpl" object=$department}
                                 </td>
                                 <td width="15%" data-th="{__("creation_date")}">
-                                    {$department.timestamp|date_format:"`$settings.Appearance.date_format`, `$settings.Appearance.time_format`"}
+                                    {$department.timestamp|date_format:"`$settings.Appearance.date_format`"}
                                 </td>
                                 <td width="6%" class="mobile-hide">
                                     {capture name="tools_list"}
@@ -126,7 +119,11 @@
 
 {/capture}
 
-
+{capture name="sidebar"}
+    {hook name="products:manage_sidebar"}
+        {include file="views/products/components/products_search_form.tpl" dispatch=$dispatch|default: "products.manage"}
+    {/hook}
+{/capture}
 
 {hook name="departments:manage_mainbox_params"}
 {$page_title = "Отделы"}
@@ -138,6 +135,8 @@
          content=$smarty.capture.mainbox
          buttons=$smarty.capture.buttons
          adv_buttons=$smarty.capture.adv_buttons
-         select_languages=$select_languages}
+         select_languages=$select_languages
+         sidebar=$smarty.capture.sidebar
+}
 
 {** ad section **}

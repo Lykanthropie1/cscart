@@ -844,7 +844,7 @@ if ($mode === 'get_manager_list') {
 
 if ($mode === 'departments_manage') {
 
-    list($departments, $search) = fn_get_departments($_REQUEST, Registry::get('settings.Appearance.admin_elements_per_page'), DESCR_SL);
+    list($departments, $search) = fn_get_departments($_REQUEST, 3, DESCR_SL);
     Tygh::$app['view']->assign('departments', $departments);
     Tygh::$app['view']->assign('search', $search);
 
