@@ -27,6 +27,9 @@
                                 <a class="cm-ajax" href="{"`$c_url`&sort_by=position&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("position")}{if $search.sort_by === "position"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a>
                             </th>
                             <th>
+
+                            </th>
+                            <th>
                                 <a class="cm-ajax" href="{"`$c_url`&sort_by=name&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("name")}{if $search.sort_by === "name"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a>
                             </th>
                             <th width="15%"><a class="cm-ajax" href="{"`$c_url`&sort_by=timestamp&sort_order=`$search.sort_order_rev`"|fn_url}" data-ca-target-id={$rev}>{__("creation_date")}{if $search.sort_by === "timestamp"}{$c_icon nofilter}{else}{$c_dummy nofilter}{/if}</a></th>
@@ -49,6 +52,19 @@
 
                                 <td>
                                     <input type="text" name="departments_data[{$department.department_id}][position]" value="{$department.position}" size="3" class="input-micro input-hidden">
+                                </td>
+
+                                <td class="products-list__image">
+                                    {include
+                                    file="common/image.tpl"
+                                    image=$department.main_pair.icon|default
+                                    image_id=$department.main_pair.image_id
+                                    image_width=$settings.Thumbnails.product_lists_thumbnail_width
+                                    image_height=$settings.Thumbnails.product_lists_thumbnail_height
+                                    href="profiles.update_department?department_id=`$department.department_id`"|fn_url
+                                    image_css_class="products-list__image--img"
+                                    link_css_class="products-list__image--link"
+                                    }
                                 </td>
 
                                 <td class="{$no_hide_input}" data-th="{__("name")}">
