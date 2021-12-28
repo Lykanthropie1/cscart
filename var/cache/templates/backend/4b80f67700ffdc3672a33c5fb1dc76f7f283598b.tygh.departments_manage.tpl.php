@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21, created on 2021-12-27 10:26:37
+<?php /* Smarty version Smarty-3.1.21, created on 2021-12-28 17:26:12
          compiled from "C:\OpenServer\domains\cscart\design\backend\templates\views\profiles\departments_manage.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:105291261c965173c0d11-29885197%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4b80f67700ffdc3672a33c5fb1dc76f7f283598b' => 
     array (
       0 => 'C:\\OpenServer\\domains\\cscart\\design\\backend\\templates\\views\\profiles\\departments_manage.tpl',
-      1 => 1640589991,
+      1 => 1640701492,
       2 => 'tygh',
     ),
   ),
