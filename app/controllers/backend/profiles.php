@@ -247,6 +247,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         return [CONTROLLER_STATUS_REDIRECT, $url];
     }
+    //POST controllers for departments
+
+    if ($mode === 'update_department') {
+
+        $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
+        $data = !empty($_REQUEST['department_data']) ? $_REQUEST['department_data'] : [];
+        $department_id = fn_update_department($data, $department_id );
+        if (!empty($department_id)) {
+            return [CONTROLLER_STATUS_OK, 'profiles.update_department?department_id=' . $department_id];
+        } else {
+            return [CONTROLLER_STATUS_OK, 'profiles..add_department'];
+        }
+
+    }if ($mode === 'adding_department') {
+        $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
+        $data = !empty($_REQUEST['department_data']) ? $_REQUEST['department_data'] : [];
+        $department_id = fn_add_department($data, $department_id );
+        if (!empty($department_id)) {
+            return [CONTROLLER_STATUS_OK, 'profiles.update_department?department_id=' . $department_id];
+        } else {
+            return [CONTROLLER_STATUS_OK, 'profiles.add_department'];
+        }
+    }
+    elseif ($mode === 'update_departments')
+    {
+        if (!empty($_REQUEST['departments_data'])) {
+            foreach ($_REQUEST['departments_data'] as $department_id => $data) {
+                fn_update_departments($data, $department_id );
+            }
+        }
+        return [CONTROLLER_STATUS_OK, 'profiles.departments_manage'];
+
+    } elseif ($mode === 'delete_department'){
+
+        $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
+        fn_delete_department($department_id);
+        return [CONTROLLER_STATUS_OK, 'profiles.departments_manage'];
+
+    } elseif ($mode === 'delete_departments') {
+        if (!empty($_REQUEST['departments_ids'])) {
+            foreach ($_REQUEST['departments_ids'] as $department_id) {
+                fn_delete_department($department_id);
+            }
+        }
+        return [CONTROLLER_STATUS_OK, 'profiles.departments_manage'];
+    }
+
 }
 
 if ($mode === 'manage') {
@@ -796,161 +843,115 @@ if ($mode === 'get_manager_list') {
 
 if ($mode === 'departments_manage') {
 
-//    list($departments, $search) = fn_get_departments($_REQUEST, Registry::get('settings.Appearance.admin_elements_per_page'), DESCR_SL);
-//    Tygh::$app['view']->assign('departments', $departments);
-//    Tygh::$app['view']->assign('search', $search);
-//
+    list($departments, $search) = fn_get_departments($_REQUEST, Registry::get('settings.Appearance.admin_elements_per_page'), DESCR_SL);
+    Tygh::$app['view']->assign('departments', $departments);
+    Tygh::$app['view']->assign('search', $search);
+
 }elseif ($mode === 'add_department' || $mode === 'update_department') {
-//    $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
-//    $department_data = fn_get_department_data($department_id, DESCR_SL);
-//    if (empty($department_data) && mode === 'update') {
-//        return [CONTROLLER_STATUS_NO_PAGE];
-//    }
-//    Tygh::$app['view']->assign([
-//        'department_data' => $department_data,
-//        'd_info' => !empty($department_data)? fn_get_user_short_info($department_data['director_id']) : [],
-//        'w_info' => !empty($department_data)? fn_get_user_short_info($department_data['worker_id']) : []
-//    ]);
+    $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
+    $department_data = fn_get_department_data($department_id, DESCR_SL);
+    if (empty($department_data) && mode === 'update') {
+        return [CONTROLLER_STATUS_NO_PAGE];
+    }
+    Tygh::$app['view']->assign([
+        'department_data' => $department_data,
+        'd_info' => !empty($department_data)? fn_get_user_short_info($department_data['director_id']) : [],
+        'w_info' => !empty($department_data)? fn_get_user_short_info($department_data['worker_id']) : []
+    ]);
 
 }
 
-//POST controllers for departments
 
-if ($mode === 'update_department') {
-
-    $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
-    $data = !empty($_REQUEST['department_data']) ? $_REQUEST['department_data'] : [];
-    $department_id = fn_update_department($data, $department_id );
-    if (!empty($department_id)) {
-        $suffix = ".update_department?department_id={$department_id}";
-    } else {
-        $suffix = ".add_department";
-    }
-
-}if ($mode === 'adding_department') {
-    $department_id = !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : 0;
-    $data = !empty($_REQUEST['department_data']) ? $_REQUEST['department_data'] : [];
-    $department_id = fn_add_department($data, $department_id );
-    if (!empty($department_id)) {
-        $suffix = ".update_department?department_id={$department_id}";
-    } else {
-        $suffix = ".add_department";
-    }
-}
-//elseif ($mode === 'update_collections')
-//{
-//    if (!empty($_REQUEST['collections_data'])) {
-//        foreach ($_REQUEST['collections_data'] as $collection_id => $data) {
-//            fn_update_collections($data, $collection_id );
-//        }
-//    }
-//    $suffix = ".manage_collections";
-//
-//} elseif ($mode === 'delete_collection'){
-//
-//    $collection_id = !empty($_REQUEST['collection_id']) ? $_REQUEST['collection_id'] : 0;
-//    fn_delete_collection($collection_id);
-//    $suffix = ".manage_collections";
-//
-//} elseif ($mode === 'delete_collections') {
-//    if (!empty($_REQUEST['collection_ids'])) {
-//        foreach ($_REQUEST['collection_ids'] as $collection_id) {
-//            fn_delete_collection($collection_id);
-//        }
-//    }
-//    $suffix = ".manage_collections";
-//}
-//
 ////Functions for departments
 //
-//function fn_get_department_data ($collection_id = 0, $lang_code = CART_LANGUAGE)
-//{
-//    $department = [];
-//    if(!empty($department_id)) {
-//        list($departments) = fn_get_departments([
-//            'department_id'=> $department_id
-//        ], 1, $lang_code);
-//        if (!empty($departments)) {
-//            $department = reset($departments);
-//            $department['workers_ids'] = fn_department_get_links($department['department_id']);
-//        }
-//    }
-//    return $department;
-//}
-//function fn_get_collections ($params = [], $items_per_page = 0, $lang_code = CART_LANGUAGE)
-//{
-//    // Set default values to input params
-//    $default_params = array(
-//        'page' => 1,
-//        'items_per_page' => $items_per_page
-//    );
-//
-//    $params = array_merge($default_params, $params);
-//
-//    if (AREA == 'C') {
-//        $params['status'] = 'A';
-//    }
-//
-//    $sortings = array(
-//        'timestamp' => '?:collections.timestamp',
-//        'name' => '?:collections_descriptions.collection',
-//        'status' => '?:collections.status',
-//    );
-//
-//    $condition = $limit = $join = '';
-//
-//    if (!empty($params['limit'])) {
-//        $limit = db_quote(' LIMIT 0, ?i', $params['limit']);
-//    }
-//
-//    $sorting = db_sort($params, $sortings, 'name', 'asc');
-//
-//    if (!empty($params['item_ids'])) {
-//        $condition .= db_quote(' AND ?:collections.collection_id IN (?n)', explode(',', $params['item_ids']));
-//    }
-//
-//    if (!empty($params['collection_id'])) {
-//        $condition .= db_quote(' AND ?:collections.collection_id = ?i', $params['collection_id']);
-//    }
-//
-//    if (!empty($params['user_id'])) {
-//        $condition .= db_quote(' AND ?:collections.user_id = ?i', $params['user_id']);
-//    }
-//
-//    if (!empty($params['status'])) {
-//        $condition .= db_quote(' AND ?:collections.status = ?s', $params['status']);
-//    }
-//
-//    $fields = array (
-//        '?:collections.*',
-//        '?:collections_descriptions.collection',
-//        '?:collections_descriptions.description',
-//    );
-//
-//    $join .= db_quote(' LEFT JOIN ?:collections_descriptions ON ?:collections_descriptions.collection_id = ?:collections.collection_id AND ?:collections_descriptions.lang_code = ?s', $lang_code);
-//
-//    if (!empty($params['items_per_page'])) {
-//        $params['total_items'] = db_get_field("SELECT COUNT(*) FROM ?:collections $join WHERE 1 $condition");
-//        $limit = db_paginate($params['page'], $params['items_per_page'], $params['total_items']);
-//    }
-//
-//    $collections = db_get_hash_array(
-//        "SELECT ?p FROM ?:collections " .
-//        $join .
-//        "WHERE 1 ?p ?p ?p",
-//        'collection_id', implode(', ', $fields), $condition, $sorting, $limit
-//    );
-//
-//    $collection_image_ids = array_keys($collections);
-//    $images = fn_get_image_pairs($collection_image_ids, 'collection', 'M', true, false, $lang_code);
-//
-//    foreach ($collections as $collection_id => $collection) {
-//        $collections[$collection_id]['main_pair'] = !empty($images[$collection_id]) ? reset($images[$collection_id]) : array();
-//    }
-//
-//    return array($collections, $params);
-//}
-//
+function fn_get_department_data ($department_id = 0, $lang_code = CART_LANGUAGE)
+{
+    $department = [];
+    if(!empty($department_id)) {
+        list($departments) = fn_get_departments([
+            'department_id'=> $department_id
+        ], 1, $lang_code);
+        if (!empty($departments)) {
+            $department = reset($departments);
+            $department['workers_ids'] = fn_department_get_links($department['department_id']);
+        }
+    }
+    return $department;
+}
+function fn_get_departments ($params = [], $items_per_page = 0, $lang_code = CART_LANGUAGE)
+{
+    // Set default values to input params
+    $default_params = array(
+        'page' => 1,
+        'items_per_page' => $items_per_page
+    );
+
+    $params = array_merge($default_params, $params);
+
+    if (AREA == 'C') {
+        $params['status'] = 'A';
+    }
+
+    $sortings = array(
+        'timestamp' => '?:departments.timestamp',
+        'name' => '?:department_descriptions.department',
+        'status' => '?:departments.status',
+    );
+
+    $condition = $limit = $join = '';
+
+    if (!empty($params['limit'])) {
+        $limit = db_quote(' LIMIT 0, ?i', $params['limit']);
+    }
+
+    $sorting = db_sort($params, $sortings, 'name', 'asc');
+
+    if (!empty($params['item_ids'])) {
+        $condition .= db_quote(' AND ?:departments.department_id IN (?n)', explode(',', $params['item_ids']));
+    }
+
+    if (!empty($params['department_id'])) {
+        $condition .= db_quote(' AND ?:departments.department_id = ?i', $params['department_id']);
+    }
+
+    if (!empty($params['director_id'])) {
+        $condition .= db_quote(' AND ?:departments.director_id = ?i', $params['director_id']);
+    }
+
+    if (!empty($params['status'])) {
+        $condition .= db_quote(' AND ?:departments.status = ?s', $params['status']);
+    }
+
+    $fields = array (
+        '?:departments.*',
+        '?:department_descriptions.department',
+        '?:department_descriptions.description',
+    );
+
+    $join .= db_quote(' LEFT JOIN ?:department_descriptions ON ?:department_descriptions.department_id = ?:departments.department_id AND ?:department_descriptions.lang_code = ?s', $lang_code);
+
+    if (!empty($params['items_per_page'])) {
+        $params['total_items'] = db_get_field("SELECT COUNT(*) FROM ?:departments $join WHERE 1 $condition");
+        $limit = db_paginate($params['page'], $params['items_per_page'], $params['total_items']);
+    }
+
+    $departments = db_get_hash_array(
+        "SELECT ?p FROM ?:departments " .
+        $join .
+        "WHERE 1 ?p ?p ?p",
+        'department_id', implode(', ', $fields), $condition, $sorting, $limit
+    );
+
+    $department_image_ids = array_keys($departments);
+    $images = fn_get_image_pairs($department_image_ids, 'department', 'M', true, false, $lang_code);
+
+    foreach ($departments as $department_id => $department) {
+        $departments[$department_id]['main_pair'] = !empty($images[$department_id]) ? reset($images[$department_id]) : array();
+    }
+
+    return array($departments, $params);
+}
+
 function fn_update_department($data, $department_id, $lang_code = DESCR_SL)
 {
 
@@ -976,8 +977,8 @@ function fn_update_department($data, $department_id, $lang_code = DESCR_SL)
 
     $workers_ids = !empty($data['workers_ids']) ? $data['workers_ids'] : [];
 
-    fn_collection_delete_links ($department_id);
-    fn_collection_add_links ($department_id, $workers_ids);
+    fn_department_delete_links ($department_id);
+    fn_department_add_links ($department_id, $workers_ids);
 
     return $department_id;
 }
@@ -1013,40 +1014,40 @@ function fn_add_department($data, $department_id, $lang_code = DESCR_SL)
     return $department_id;
 }
 
-//function fn_update_collections($data, $collection_id, $lang_code = DESCR_SL)
-//{
-//
-//    if (isset($data['timestamp'])) {
-//        $data['timestamp'] = fn_parse_date($data['timestamp']);
-//    }
-//
-//    if (!empty($collection_id)) {
-//        db_query("UPDATE ?:collections SET ?u WHERE collection_id = ?i", $data, $collection_id);
-//        db_query("UPDATE ?:collections_descriptions SET ?u WHERE collection_id = ?i AND lang_code = ?s", $data, $collection_id, $lang_code);
-//
-//    } else {
-//        $collection_id = $data['collection_id'] = db_replace_into('collections', $data );
-//
-//        foreach (Languages::getAll() as $data['lang_code'] => $v) {
-//            db_query("REPLACE INTO ?:collections_descriptions ?e", $data);
-//        }
-//    }
-//    if (!empty($collection_id)) {
-//        fn_attach_image_pairs('collection', 'collection', $collection_id, $lang_code);
-//    }
-//
-//    return $collection_id;
-//}
-//
-//function fn_delete_collection($collection_id)
-//{
-//    if (!empty($collection_id)) {
-//        db_query("DELETE FROM ?:collections WHERE collection_id = ?i", $collection_id);
-//        db_query("DELETE FROM ?:collections_descriptions WHERE collection_id = ?i", $collection_id);
-//        fn_collection_delete_links ($collection_id);
-//    }
-//}
-//
+function fn_update_departments($data, $department_id, $lang_code = DESCR_SL)
+{
+
+    if (isset($data['timestamp'])) {
+        unset($data['timestamp']);;
+    }
+
+    if (!empty($department_id)) {
+        db_query("UPDATE ?:departments SET ?u WHERE department_id = ?i", $data, $department_id);
+        db_query("UPDATE ?:department_descriptions SET ?u WHERE department_id = ?i AND lang_code = ?s", $data, $department_id, $lang_code);
+
+    } else {
+        $department_id = $data['department_id'] = db_replace_into('departments', $data );
+
+        foreach (Languages::getAll() as $data['lang_code'] => $v) {
+            db_query("REPLACE INTO ?:department_descriptions ?e", $data);
+        }
+    }
+    if (!empty($department_id)) {
+        fn_attach_image_pairs('department', 'department', $department_id, $lang_code);
+    }
+
+    return $department_id;
+}
+
+function fn_delete_department($department_id)
+{
+    if (!empty($department_id)) {
+        db_query("DELETE FROM ?:departments WHERE department_id = ?i", $department_id);
+        db_query("DELETE FROM ?:department_descriptions WHERE department_id = ?i", $department_id);
+        fn_department_delete_links ($department_id);
+    }
+}
+
 function  fn_department_delete_links ($department_id) {
     db_query("DELETE FROM ?:department_links WHERE department_id = ?i", $department_id);
 }
@@ -1061,7 +1062,7 @@ function fn_department_add_links ($department_id, $workers_ids) {
         }
     }
 }
-//function fn_department_get_links ($department_id) {
-//    return !empty($department_id) ? db_get_fields('SELECT worker_id FROM ?:department_links WHERE department_id = ?i',$department_id ) : [];
-//}
+function fn_department_get_links ($department_id) {
+    return !empty($department_id) ? db_get_fields('SELECT worker_id FROM ?:department_links WHERE department_id = ?i',$department_id ) : [];
+}
 

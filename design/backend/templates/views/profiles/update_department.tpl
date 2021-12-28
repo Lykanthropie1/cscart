@@ -78,7 +78,7 @@
                     but_text=__("add_workers")
                     data_id="return_users"
                     but_meta="btn"
-                    input_name="department_data[workers_ids][]"
+                    input_name="department_data[workers_ids]"
                     item_ids=$department_data.workers_ids
                     placement="right"
                     user_info = $w_info}

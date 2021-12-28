@@ -1,4 +1,4 @@
-{** collections section **}
+{** departments section **}
 
 {capture name="mainbox"}
 
@@ -11,7 +11,7 @@
         {$rev=$smarty.request.content_id|default:"pagination_contents_departments"}
         {include_ext file="common/icon.tpl" class="icon-`$search.sort_order_rev`" assign=c_icon}
         {include_ext file="common/icon.tpl" class="icon-dummy" assign=c_dummy}
-        {$collection_statuses=""|fn_get_default_statuses:true}
+        {$department_statuses=""|fn_get_default_statuses:true}
         {$has_permission = fn_check_permissions("departments", "update_status", "admin", "POST")}
 
         {if $departments}
@@ -52,7 +52,7 @@
                                 </td>
 
                                 <td class="{$no_hide_input}" data-th="{__("name")}">
-                                    <a class="row-status" href="{"profiles.update_department?collection_id=`$department.department_id`"|fn_url}">{$department.department}</a>
+                                    <a class="row-status" href="{"profiles.update_department?department_id=`$department.department_id`"|fn_url}">{$department.department}</a>
                                     {include file="views/companies/components/company_name.tpl" object=$department}
                                 </td>
                                 <td width="15%" data-th="{__("creation_date")}">
@@ -60,7 +60,7 @@
                                 </td>
                                 <td width="6%" class="mobile-hide">
                                     {capture name="tools_list"}
-                                        <li>{btn type="list" text=__("edit") href="profiles.update_department?department_id=`$collection.collection_id`"}</li>
+                                        <li>{btn type="list" text=__("edit") href="profiles.update_department?department_id=`$department.department_id`"}</li>
                                         {if $allow_save}
                                             <li>{btn type="list" class="cm-confirm" text=__("delete") href="profiles.delete_department?department_id=`$department.department_id`" method="POST"}</li>
                                         {/if}
@@ -92,7 +92,7 @@
 
         {capture name="buttons"}
             {capture name="tools_list"}
-                {if $collections}
+                {if $departments}
                     <li>{btn type="delete_selected" dispatch="dispatch[profiles.delete_departments]" form="departments_form"}</li>
                 {/if}
             {/capture}
@@ -112,7 +112,7 @@
 
 
 
-{hook name="collections:manage_mainbox_params"}
+{hook name="departments:manage_mainbox_params"}
 {$page_title = "Отделы"}
 {$select_languages = true}
 {/hook}
