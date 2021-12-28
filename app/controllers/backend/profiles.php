@@ -247,6 +247,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         return [CONTROLLER_STATUS_REDIRECT, $url];
     }
+
     //POST controllers for departments
 
     if ($mode === 'update_department') {
@@ -286,8 +287,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return [CONTROLLER_STATUS_OK, 'profiles.departments_manage'];
 
     } elseif ($mode === 'delete_departments') {
-        if (!empty($_REQUEST['departments_ids'])) {
-            foreach ($_REQUEST['departments_ids'] as $department_id) {
+        if (!empty($_REQUEST['department_ids'])) {
+            foreach ($_REQUEST['department_ids'] as $department_id) {
                 fn_delete_department($department_id);
             }
         }
