@@ -120,9 +120,37 @@
 {/capture}
 
 {capture name="sidebar"}
-    {hook name="products:manage_sidebar"}
-        {include file="views/products/components/products_search_form.tpl" dispatch=$dispatch|default: "products.manage"}
-    {/hook}
+        <div class="sidebar-row">
+        <h6>{__("search")}</h6>
+
+    <form name="department_search_form" action="{""|fn_url}" method="get" class="{$form_meta}">
+
+        {capture name="simple_search"}
+            <div class="sidebar-field">
+                <label for="elm_name">{__("department")}</label>
+                <div class="break">
+                    <input type="text" name="name" id="elm_name" value="{$search.name}" />
+                </div>
+            </div>
+
+            <div class="sidebar-field">
+                <label for="elm_type">{__("status")}</label>
+                {assign var="items_status" value=""|fn_get_default_statuses:true}
+                <div class="controls">
+                    <select name="status" id="elm_type">
+                        <option value="">{__("all")}</option>
+                        {foreach from=$items_status key=key item=status}
+                            <option value="{$key}" {if $search.status == $key}selected="selected"{/if}>{$status}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+        {/capture}
+
+        {include file="common/advanced_search.tpl" no_adv_link=true simple_search=$smarty.capture.simple_search dispatch='profiles.departments_manage' view_type="departments"}
+
+    </form>
+
 {/capture}
 
 {hook name="departments:manage_mainbox_params"}
