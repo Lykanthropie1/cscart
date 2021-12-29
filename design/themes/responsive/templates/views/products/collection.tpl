@@ -2,7 +2,13 @@
     <div class="ty-feature">
         {if $collection_data.main_pair}
             <div class="ty-feature__image">
-                {include file="common/image.tpl" images=$collection_data.main_pair}
+                {include
+                file="common/image.tpl"
+                no_ids=true
+                images=$collection_data.main_pair
+                image_width=$settings.Thumbnails.product_lists_thumbnail_width
+                image_height=$settings.Thumbnails.product_lists_thumbnail_height
+                lazy_load=true}
             </div>
         {/if}
             <div class="ty-feature__description ty-wysiwyg-content">

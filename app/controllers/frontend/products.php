@@ -281,6 +281,7 @@ if ($mode == 'search') {
     $collection_data = [];
     $collection_id = !empty($_REQUEST['collection_id']) ? $_REQUEST['collection_id'] : 0;
     $collection_data = fn_get_collection_data($collection_id, CART_LANGUAGE);
+    fn_print_die($collection_data);
     if (empty($collection_data)) {
         return [CONTROLLER_STATUS_NO_PAGE];
     }
