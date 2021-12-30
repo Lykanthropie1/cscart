@@ -16,7 +16,7 @@
             </div>
     </div>
             {if $workers}
-                    <div class="container-fluid">
+                    <div>
                         <table class="table table-middle table--relative table-responsive">
                             <thead>
                             <tr>

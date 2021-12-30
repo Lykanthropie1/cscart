@@ -28,7 +28,6 @@ if ($mode === 'view') {
         } else {
             $departments[$department]['director_id'] = '';
         }
-        $departments = $departments;
     }
 
     Tygh::$app['view']->assign('departments', $departments);
@@ -45,17 +44,12 @@ if ($mode === 'view') {
     if (empty($department_data)) {
         return [CONTROLLER_STATUS_NO_PAGE];
     }
-
-    Tygh::$app['view']->assign('department_data', $department_data);
-
-    fn_add_breadcrumb($department_data['department']);
-
     foreach ($department_data['workers_ids'] as $worker => $id) {
         $department_data['workers_ids'][$worker] = fn_get_user_short_info($id);
         $worker++;
     }
 
+    Tygh::$app['view']->assign('department_data', $department_data);
+    fn_add_breadcrumb($department_data['department']);
     Tygh::$app['view']->assign('workers', $department_data['workers_ids']);
-//    Tygh::$app['view']->assign('search', $search);
-//    Tygh::$app['view']->assign('selected_layout', $selected_layout);
 }

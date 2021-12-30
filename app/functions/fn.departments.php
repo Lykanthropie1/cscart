@@ -56,6 +56,10 @@ function fn_get_departments ($params = [], $items_per_page = 0, $lang_code = CAR
 
     $sorting = db_sort($params, $sortings, 'name', 'asc');
 
+    if (!empty($params['department_id'])) {
+        $condition .= db_quote(' AND ?:departments.department_id = ?i', $params['department_id']);
+    }
+
     if (!empty($params['name'])) {
         $condition .= db_quote(' AND ?:department_descriptions.department LIKE ?l', '%' . trim($params['name']) . '%');
     }
