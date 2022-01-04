@@ -40,7 +40,7 @@ if ($mode === 'view') {
 } elseif ($mode === 'info') {
     $params = $_REQUEST;
 
-    if ($items_per_page = 3) {
+    if ($items_per_page = 10) {
         $params['items_per_page'] = $items_per_page;
     }
     $department_data = [];

@@ -24,14 +24,14 @@
 
     {if $workers}
         <div class="ty-container">
-            <h2>Сотрудники:</h2>
+            <h2>{__("workers")}:</h2>
             <table class="table table-middle table--relative table-responsive">
                 <thead>
                 <tr>
                     <th>
                         <a class="cm-no-ajax"
                            href="{"`$c_url`&sort_by=name&sort_order=`$search.sort_order_rev`"|fn_url}"
-                           data-ca-target-id={$rev}>{__("name")}
+                           data-ca-target-id={$rev}>{__("first_name_and_last_name")}
                             {if $search.sort_by === "name"}{$c_icon nofilter}
                             {else}{$c_dummy nofilter}
                             {/if}
@@ -58,9 +58,11 @@
                         {/if}
 
                         <td class="ty-categories-picker__title" style="width: 6%" class="{$no_hide_input}" data-th="{__("name")}">
-                            <a class="row-status" href="{"products.update_collection?collection_id=`$collection.collection_id`"|fn_url}">{$worker.lastname} {$worker.firstname}</a>
+                            <p class="row-status">{$worker.lastname} {$worker.firstname}</p>
                         </td>
-                        <td class="ty-categories-picker__title" style="width: 6%" data-th="{__("email")}"><a class="row-status" href="mailto:{$user.email|escape:url}">{$worker.email}</a></td>
+                        <td class="ty-categories-picker__title" style="width: 6%" data-th="{__("email")}">
+                            <a class="row-status" href="mailto:{$user.email|escape:url}">{$worker.email}</a>
+                        </td>
                     </tr>
                 {/foreach}
             </table>

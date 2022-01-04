@@ -103,7 +103,7 @@
 
 
 {include file="common/mainbox.tpl"
-title=($id) ? $department_data.department : ("Добавить новый отдел")
+title=($id) ? $department_data.department : __("add_new_department")
 content=$smarty.capture.mainbox
 adv_buttons = $smarty.capture.adv_buttons
 buttons=$smarty.capture.buttons
