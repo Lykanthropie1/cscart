@@ -20,7 +20,7 @@
     {$c_url=$config.current_url|fn_query_remove:"sort_by":"sort_order"}
     {include_ext file="common/icon.tpl" class="icon-`$search.sort_order_rev`" assign=c_icon}
     {include_ext file="common/icon.tpl" class="icon-dummy" assign=c_dummy}
-    {$rev=$smarty.request.content_id|default:"pagination_contents_department"}
+    {$rev=$smarty.request.content_id|default:"pagination_contents"}
 
     {if $workers}
         <div class="ty-container">
@@ -29,7 +29,7 @@
                 <thead>
                 <tr>
                     <th>
-                        <a class="cm-no-ajax"
+                        <a class="cm-ajax"
                            href="{"`$c_url`&sort_by=name&sort_order=`$search.sort_order_rev`"|fn_url}"
                            data-ca-target-id={$rev}>{__("first_name_and_last_name")}
                             {if $search.sort_by === "name"}{$c_icon nofilter}
@@ -38,7 +38,7 @@
                         </a>
                     </th>
                     <th>
-                        <a class="cm-no-ajax"
+                        <a class="cm-ajax"
                            href="{"`$c_url`&sort_by=email&sort_order=`$search.sort_order_rev`"|fn_url}"
                            data-ca-target-id={$rev}>{__("email")}
                             {if $search.sort_by === "email"}{$c_icon nofilter}
@@ -57,7 +57,7 @@
                             {assign var = "no_hide_input" value =""}
                         {/if}
 
-                        <td class="ty-categories-picker__title" style="width: 6%" class="{$no_hide_input}" data-th="{__("name")}">
+                        <td class="ty-categories-picker__title" style="width: 6%" class="{$no_hide_input}" data-th="{__("first_name_and_last_name")}">
                             <p class="row-status">{$worker.lastname} {$worker.firstname}</p>
                         </td>
                         <td class="ty-categories-picker__title" style="width: 6%" data-th="{__("email")}">
