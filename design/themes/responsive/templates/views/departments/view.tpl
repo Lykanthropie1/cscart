@@ -21,12 +21,10 @@
         {strip}
             {foreach from=$splitted_departments item="sdepartments"}
                 {foreach from=$sdepartments item="department"}
-
                     <div class="ty-column{$columns}">
                         {if $department}
                             {assign var="obj_id" value=$department.department_id}
                             {assign var="obj_id_prefix" value="`$obj_prefix``$department.department_id`"}
-
                             <div class="ty-grid-list__item ty-quick-view-button__wrapper">
                                     <div class="ty-grid-list__image">
                                         <a href="{"departments.info?department_id={$department.department_id}"|fn_url}"|fn_url}">
@@ -42,7 +40,10 @@
                                     <div class="ty-grid-list__item-name">
                                         {assign var="name" value="name_$obj_id"}
                                         <bdi>
-                                            <a href="{"departments.info?department_id={$department.department_id}"|fn_url}" class="product-title" title="{$department.department}">{$department.department}</a>
+                                            <a href="{"departments.info?department_id={$department.department_id}"|fn_url}"
+                                               class="product-title"
+                                               title="{$department.department}">{$department.department}
+                                            </a>
                                         </bdi>
                                         <p>{$department['director_id']['firstname']} {$department['director_id']['lastname']}</p>
                                     </div>
