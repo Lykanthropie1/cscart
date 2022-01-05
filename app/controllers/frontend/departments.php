@@ -16,6 +16,10 @@ if ($mode === 'view') {
 
     $params['user_id'] = Tygh::$app['session']['auth']['user_id'];
 
+    if (empty($params['user_id'])) {
+        return array(CONTROLLER_STATUS_NO_PAGE);
+    }
+
     list($departments, $search) = fn_get_departments($params, Registry::get('settings.Appearance.products_per_page'), CART_LANGUAGE);
 
     if (isset($search['page']) && ($search['page'] > 1) && empty($departments)) {
@@ -49,8 +53,10 @@ if ($mode === 'view') {
     if (empty($department_data)) {
         return [CONTROLLER_STATUS_NO_PAGE];
     }
-    $params['user_id'] = $department_data ['workers_ids'];
-    list($users, $search) = fn_get_users($params, $auth, Registry::get('settings.Appearance.admin_elements_per_page'));
+    if (!empty($department_data ['workers_ids'])) {
+        $params['user_id'] = $department_data ['workers_ids'];
+        list($users, $search) = fn_get_users($params, $auth, Registry::get('settings.Appearance.admin_elements_per_page'));
+    }
 
     Tygh::$app['view']->assign('department_data', $department_data);
     fn_add_breadcrumb($department_data['department']);
