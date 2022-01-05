@@ -10,7 +10,7 @@ if ($mode === 'view') {
 
     $params = $_REQUEST;
 
-    if ($items_per_page = 10) {
+    if ($items_per_page = 6) {
         $params['items_per_page'] = $items_per_page;
     }
 

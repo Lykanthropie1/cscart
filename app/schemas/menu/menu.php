@@ -525,7 +525,7 @@ $schema = [
                     'position' => 800,
                 ],
                 'departments' => [
-                    'href' => 'profiles.departments_manage',
+                    'href' => 'departments.manage',
                     'position' => 800,
                 ],
             ],

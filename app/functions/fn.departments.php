@@ -1,16 +1,6 @@
 <?php
-use Tygh\BlockManager\Block;
-use Tygh\Enum\NotificationSeverity;
-use Tygh\Enum\SiteArea;
-use Tygh\Enum\UserTypes;
+
 use Tygh\Languages\Languages;
-use Tygh\Navigation\LastView;
-use Tygh\Providers\StorefrontProvider;
-use Tygh\Registry;
-use Tygh\Storefront\Storefront;
-use Tygh\Tools\SecurityHelper;
-use Tygh\Enum\YesNo;
-use Tygh\Enum\ObjectStatuses;
 
 ////Functions for departments
 //
