@@ -258,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($department_id)) {
             return [CONTROLLER_STATUS_OK, 'profiles.update_department?department_id=' . $department_id];
         } else {
-            return [CONTROLLER_STATUS_OK, 'profiles..add_department'];
+            return [CONTROLLER_STATUS_OK, 'profiles.add_department'];
         }
 
     }if ($mode === 'adding_department') {

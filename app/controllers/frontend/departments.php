@@ -53,6 +53,10 @@ if ($mode === 'view') {
     if (empty($department_data)) {
         return [CONTROLLER_STATUS_NO_PAGE];
     }
+    $params['user_id'] = Tygh::$app['session']['auth']['user_id'];
+    if (empty($params['user_id'])) {
+        return array(CONTROLLER_STATUS_NO_PAGE);
+    }
     if (!empty($department_data ['workers_ids'])) {
         $params['user_id'] = $department_data ['workers_ids'];
         list($users, $search) = fn_get_users($params, $auth, Registry::get('settings.Appearance.admin_elements_per_page'));
