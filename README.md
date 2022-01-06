@@ -1,2 +1,2 @@
 # cscart
-cscart module
+cscart store
