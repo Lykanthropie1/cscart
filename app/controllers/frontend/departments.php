@@ -7,17 +7,10 @@ if (!defined('BOOTSTRAP')) {
 }
 
 if ($mode === 'view') {
-
     $params = $_REQUEST;
 
     if ($items_per_page = 6) {
         $params['items_per_page'] = $items_per_page;
-    }
-
-    $params['user_id'] = Tygh::$app['session']['auth']['user_id'];
-
-    if (empty($params['user_id'])) {
-        return array(CONTROLLER_STATUS_NO_PAGE);
     }
 
     list($departments, $search) = fn_get_departments($params, Registry::get('settings.Appearance.products_per_page'), CART_LANGUAGE);
