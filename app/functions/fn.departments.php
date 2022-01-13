@@ -1,6 +1,7 @@
 <?php
 
 use Tygh\Languages\Languages;
+use Tygh\Registry;
 
 ////Functions for departments
 //
@@ -23,7 +24,8 @@ function fn_get_departments ($params = [], $items_per_page = 0, $lang_code = CAR
     // Set default values to input params
     $default_params = array(
         'page' => 1,
-        'items_per_page' => $items_per_page
+        'items_per_page' => $items_per_page,
+        'use_caching' => true
     );
 
     $params = array_merge($default_params, $params);

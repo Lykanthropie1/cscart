@@ -1,6 +1,7 @@
 <?php
 
 use Tygh\Tygh;
+use Tygh\Registry;
 
 defined('BOOTSTRAP') or die('Access denied');
 

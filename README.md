@@ -1,3 +1,4 @@
+
 # cscart departments module
 
 <details>
@@ -140,7 +141,3 @@
 + Дождаться окончания автотеста.<br>
 
 </details>
-
-
-
-
