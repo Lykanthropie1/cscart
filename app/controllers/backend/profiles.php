@@ -20,6 +20,7 @@ use Tygh\Enum\UserTypes;
 use Tygh\Enum\YesNo;
 use Tygh\Registry;
 use Tygh\Tools\Url;
+use Tygh\Languages\Languages;
 use Tygh\Tygh;
 
 defined('BOOTSTRAP') or die('Access denied');
@@ -420,7 +421,6 @@ if ($mode === 'manage') {
             fn_set_storage_data('session_' . $session_key . '_data', serialize($sess_data));
         } else {
             fn_init_user_session_data($sess_data, $user_id, true);
-
             /** @var array $sess_data */
 
             // Set flag for backward compatibility

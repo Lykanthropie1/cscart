@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD']	== 'POST') {
     fn_trusted_vars('banners', 'banner_data');
     $suffix = '';
 
-    //
-    // Delete banners
-    //
+
+//     Delete banners
+
     if ($mode == 'm_delete') {
         foreach ($_REQUEST['banner_ids'] as $v) {
             fn_delete_banner_by_id($v);
@@ -64,9 +64,9 @@ if ($_SERVER['REQUEST_METHOD']	== 'POST') {
         }
     }
 
-    //
-    // Add/edit banners
-    //
+
+//     Add/edit banners
+
     if ($mode == 'update') {
         $banner_id = fn_banners_update_banner($_REQUEST['banner_data'], $_REQUEST['banner_id'], DESCR_SL);
 
